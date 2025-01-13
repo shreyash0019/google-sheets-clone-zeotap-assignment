@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const cell_1 = __importDefault(require("../controllers/cell"));
+const verifyToken_1 = __importDefault(require("../middlewares/verifyToken"));
+const router = (0, express_1.Router)();
+router.use(verifyToken_1.default);
+router.post("/:gridId/create", cell_1.default.createCell);
+router.post("/:gridId/duplicate", cell_1.default.duplicateCells);
+router.post("/:cellId/copypaste", cell_1.default.copyPasteCell);
+router.put("/:gridId/insert/column", cell_1.default.insertColumn);
+router.put("/:gridId/insert/row", cell_1.default.insertRow);
+router.put("/:cellId/update", cell_1.default.updateCell);
+router.delete("/:cellId/cell", cell_1.default.removeCell);
+router.delete("/:gridId/row", cell_1.default.removeRow);
+router.delete("/:gridId/column", cell_1.default.removeColumn);
+exports.default = router;
